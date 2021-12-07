@@ -1,0 +1,7 @@
+# {{ github.event.repository.name }}
+
+## Usage
+
+```yaml
+{{ files['.github/workflows/example.yml'] }}
+```
