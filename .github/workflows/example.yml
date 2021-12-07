@@ -17,15 +17,17 @@ jobs:
         with:
           repository: EffortGames/action-template
           token: ${{ steps.generate_token.outputs.token }}
-      - name: Create github.json
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - name: Create README.md
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "github.json:"
           echo "$GITHUB_CONTEXT" | tee github.json
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
-      - run: |
           pip install -r requirements.txt
-          ./main.py README.md.template github.json .github/workflows/example.yml
+          ./main.py README.md.template github.json .github/workflows/example.yml > README.md
+          git add README.md
+          git commit -am"Update README.md"
+          git push origin master

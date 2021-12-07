@@ -2,6 +2,8 @@
 
 ## Usage
 
+This README.md is made from [a template](README.md.template);.
+
 ```yaml
 {{ files['.github/workflows/example.yml'] }}
 ```
