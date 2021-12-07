@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Explore-GitHub-Actions:
+  run-templating:
     runs-on: ubuntu-latest
     steps:
       - name: Generate token
@@ -28,6 +28,9 @@ jobs:
           echo "$GITHUB_CONTEXT" | tee github.json
           pip install -r requirements.txt
           ./main.py README.md.template github.json .github/workflows/example.yml > README.md
+
+          git config --global user.email "automation@effortgames.nl"
+          git config --global user.name "EffortGames Automation"
           git add README.md
           git commit -am"Update README.md"
           git push origin master

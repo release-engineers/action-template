@@ -1,8 +1,10 @@
+<!-- README.md is auto-generated from README.md.template -->
+
 # {{ github.event.repository.name }}
 
 ## Usage
 
-This README.md is made from [a template](README.md.template);.
+This README.md is generated from [a template](README.md.template);.
 
 ```yaml
 {{ files['.github/workflows/example.yml'] }}
