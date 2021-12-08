@@ -1,6 +1,12 @@
-name: Example
+name: Update README.md
+
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - 'README.md.template'
+      - '.github/workflows/example.yml'
 
 permissions:
   contents: write
