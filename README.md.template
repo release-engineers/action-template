@@ -2,14 +2,85 @@
 
 # {{ github.repository }}
 
+This action allows you run the Jinja2 templating engine against any files during a GitHub workflow, and makes the GitHub context available to it.
+
 This repository is a GitHub action managed by [{{ github.repository_owner }}]({{ github.event.repository.owner.html_url }}).
 
 ## Usage
 
 This README.md itself is generated from [a template](README.md.template).
 
-The [example workflow](.github/workflows/example.yml) showcases its functionality;
+The [example workflow](.github/workflows/example.yml) showcases how to use the action;
 
 ```yml
-{{ include_file('.github/workflows/example.yml') }}
+{{ load('.github/workflows/example.yml') }}
 ```
+
+## Templates
+
+This action runs Jinja2 on templates with a few extra's;
+
+### GitHub Context
+
+The GitHub context available to workflows is also available to templates like so;
+
+{% raw %}
+```
+{{ github.repository }}
+```
+{% endraw %}
+
+When evaluated becomes:
+
+```
+{{ github.repository }}
+```
+
+### Load Files
+
+The example workflow under the Usage paragraph was loaded using;
+
+{% raw %}
+```yml
+{{ load('.github/workflows/example.yml') }}
+```
+{% endraw %}
+
+### Load JSON
+
+Load JSON data from files in the working directory like so;
+
+{% raw %}
+```
+{{ load_json('sample/data.json').info.from_json }}
+```
+{% endraw %}
+
+When evaluated becomes:
+
+```
+{{ load_json('sample/data.json').info.from_json }}
+```
+
+### Load YAML
+
+Load YAML data from files in the working directory like so;
+
+{% raw %}
+```
+{{ load_yaml('sample/data.yml').info.from_yaml }}
+```
+{% endraw %}
+
+When evaluated becomes:
+
+```
+{{ load_yaml('sample/data.yml').info.from_yaml }}
+```
+
+## Development
+
+Try it locally with Python 3.x;
+
+    pip install -r requirements.txt
+    ./main.py README.md.template "$(cat sample/github.json)"

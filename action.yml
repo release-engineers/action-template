@@ -27,8 +27,5 @@ runs:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
-        echo "github.json:"
-        echo "$GITHUB_CONTEXT" | tee "$GITHUB_ACTION_PATH/github.json"
         pip install -r "$GITHUB_ACTION_PATH/requirements.txt"
-        cd "$WORKING_DIRECTORY"
-        "$GITHUB_ACTION_PATH/main.py" "$INPUT_SOURCE" "$GITHUB_ACTION_PATH/github.json" > "$INPUT_TARGET"
+        (cd "$WORKING_DIRECTORY" && "$GITHUB_ACTION_PATH/main.py" "$INPUT_SOURCE" "$GITHUB_CONTEXT" > "$INPUT_TARGET")
