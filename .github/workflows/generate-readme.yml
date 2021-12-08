@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'README.md.template'
-      - '.github/workflows/example.yml'
+      - '.github/workflows/generate-readme.yml'
 
 permissions:
   contents: write
@@ -29,6 +29,6 @@ jobs:
           git config --global user.email "automation@effortgames.nl"
           git config --global user.name "EffortGames Automation"
           git add README.md
-          if git commit -am"Update README.md"; then
+          if git commit -m"Update README.md"; then
             git push origin master
           fi
