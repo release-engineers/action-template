@@ -6,6 +6,8 @@ This action allows you run the Jinja2 templating engine against any files during
 
 This repository is a GitHub action managed by [EffortGames](https://github.com/EffortGames).
 
+⚠️This action runs setup-python and runs pip install globally. If you care about this, make sure to run the action in a separate job.
+
 ## Usage
 
 This README.md itself is generated from [a template](README.md.template).
@@ -13,9 +15,15 @@ This README.md itself is generated from [a template](README.md.template).
 The [example workflow](.github/workflows/example.yml) showcases how to use the action;
 
 ```yml
-name: Example
+name: Update README.md
+
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - 'README.md.template'
+      - '.github/workflows/example.yml'
 
 permissions:
   contents: write
