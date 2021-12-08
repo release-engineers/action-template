@@ -19,11 +19,15 @@ jobs:
           token: ${{ steps.generate_token.outputs.token }}
           path: ./action
       - name: Run action
+        # this action's directory
         uses: ./action
         with:
-          source: './action/README.md.template'
-          target: './action/README.md'
+          # your project's directory
+          working_directory: './action'
+          source: 'README.md.template'
+          target: 'README.md'
       - run: |
+          # your project's directory
           cd ./action
           git config --global user.email "automation@effortgames.nl"
           git config --global user.name "EffortGames Automation"
