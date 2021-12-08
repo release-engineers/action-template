@@ -32,5 +32,6 @@ jobs:
           git config --global user.email "automation@effortgames.nl"
           git config --global user.name "EffortGames Automation"
           git add README.md
-          git commit -am"Update README.md"
-          git push origin master
+          if git commit -am"Update README.md"; then
+            git push origin master
+          fi
