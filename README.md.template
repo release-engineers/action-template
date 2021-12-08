@@ -6,6 +6,8 @@ This action allows you run the Jinja2 templating engine against any files during
 
 This repository is a GitHub action managed by [{{ github.repository_owner }}]({{ github.event.repository.owner.html_url }}).
 
+⚠️This action runs setup-python and runs pip install globally. If you care about this, make sure to run the action in a separate job.
+
 ## Usage
 
 This README.md itself is generated from [a template](README.md.template).
