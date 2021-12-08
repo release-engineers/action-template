@@ -18,25 +18,15 @@ jobs:
           repository: EffortGames/action-template
           token: ${{ steps.generate_token.outputs.token }}
           path: ./action
-      - uses: actions/setup-python@v2
+      - name: Run action
+        uses: ./action
         with:
-          python-version: 3.x
-      - name: Create README.md
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
+          source: './action/README.md.template'
+          target: './action/README.md'
+      - run: |
           cd ./action
-          echo "github.json:"
-          echo "$GITHUB_CONTEXT" | tee github.json
-          pip install -r requirements.txt
-          ./main.py README.md.template github.json .github/workflows/example.yml > README.md
-
           git config --global user.email "automation@effortgames.nl"
           git config --global user.name "EffortGames Automation"
           git add README.md
           git commit -am"Update README.md"
           git push origin master
-      - id: foo
-        uses: ./action
-        with:
-          who-to-greet: 'Mona the Octocat'

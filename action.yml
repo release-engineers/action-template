@@ -1,21 +1,28 @@
-name: 'Hello World'
-description: 'Greet someone'
+name: 'Action Template'
+description: 'Runs Jinja2 templating on a file, with access to the GitHub context.'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  source:
+    description: 'Source file, a Jinja2 template'
     required: true
-    default: 'World'
-outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+  target:
+    description: 'Target file to create or overwrite'
+    required: true
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+    - name: apply templating
       shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
-      shell: bash
-    - run: echo action path is ${{ github.action_path }}
-      shell: bash
+      env:
+        INPUT_SOURCE: ${{ inputs.source }}
+        INPUT_TARGET: ${{ inputs.target }}
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "github.json:"
+        echo "$GITHUB_CONTEXT" | tee "$GITHUB_ACTION_PATH/github.json"
+        pip install -r "$GITHUB_ACTION_PATH/requirements.txt"
+        "$GITHUB_ACTION_PATH/main.py" "$INPUT_SOURCE" "$GITHUB_ACTION_PATH/github.json" > "$INPUT_TARGET"

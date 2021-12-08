@@ -6,6 +6,6 @@
 
 This README.md is generated from [a template](README.md.template);.
 
-```yaml
-{{ files['.github/workflows/example.yml'] }}
+```json
+{{ files['github.json'] }}
 ```
