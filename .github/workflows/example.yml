@@ -2,33 +2,24 @@ name: Example
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   run-templating:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate token
-        id: generate_token
-        uses: tibdex/github-app-token@v1
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
-      - name: Checkout action
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           repository: EffortGames/action-template
-          token: ${{ steps.generate_token.outputs.token }}
-          path: ./action
-      - name: Run action
-        # this action's directory
-        uses: ./action
+          path: my-project
+      - uses: EffortGames/action-template@v1
         with:
-          # your project's directory
-          working_directory: './action'
+          working_directory: './my-project'
           source: 'README.md.template'
           target: 'README.md'
       - run: |
-          # your project's directory
-          cd ./action
+          cd my-project
           git config --global user.email "automation@effortgames.nl"
           git config --global user.name "EffortGames Automation"
           git add README.md
