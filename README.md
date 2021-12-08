@@ -26,6 +26,7 @@ jobs:
         with:
           repository: EffortGames/action-template
           token: ${{ steps.generate_token.outputs.token }}
+          path: ./action
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
@@ -33,6 +34,7 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
+          cd ./action
           echo "github.json:"
           echo "$GITHUB_CONTEXT" | tee github.json
           pip install -r requirements.txt
@@ -43,5 +45,8 @@ jobs:
           git add README.md
           git commit -am"Update README.md"
           git push origin master
-
+      - id: foo
+        uses: ./action
+        with:
+          who-to-greet: 'Mona the Octocat'
 ```
