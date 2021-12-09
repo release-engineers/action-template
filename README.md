@@ -110,6 +110,50 @@ When evaluated becomes:
 This text comes from a YAML file
 ```
 
+### Load Markdown Table of Contents as HTML
+
+Parse and obtain a Markdown table of contents from files in the working directory like so;
+
+
+```
+{{ load_markdown_toc('sample/data.md') }}
+```
+
+
+When evaluated becomes:
+
+```
+<div class="toc">
+<ul>
+<li><a href="#header-one">Header One</a><ul>
+<li><a href="#header-two">Header Two</a><ul>
+<li><a href="#header-three">Header Three</a></li>
+<li><a href="#header-three-two">Header Three, Two</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+```
+
+### Load Markdown Table of Contents as data
+
+Parse and handle Markdown table of contents data from files in the working directory like so;
+
+
+```
+{{ load_markdown_toc_tokens('sample/data.md') }}
+```
+
+
+When evaluated becomes:
+
+```
+[{'level': 1, 'id': 'header-one', 'name': 'Header One', 'children': [{'level': 2, 'id': 'header-two', 'name': 'Header Two', 'children': [{'level': 3, 'id': 'header-three', 'name': 'Header Three', 'children': []}, {'level': 3, 'id': 'header-three-two', 'name': 'Header Three, Two', 'children': []}]}]}]
+```
+
 ## Development
 
 Try it locally with Python 3.x;
