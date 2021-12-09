@@ -76,6 +76,38 @@ When evaluated becomes:
 {{ load_yaml('sample/data.yml').info.from_yaml }}
 ```
 
+### Load Markdown Table of Contents as HTML
+
+Parse and obtain a Markdown table of contents from files in the working directory like so;
+
+{% raw %}
+```
+{{ load_markdown_toc('sample/data.md') }}
+```
+{% endraw %}
+
+When evaluated becomes:
+
+```
+{{ load_markdown_toc('sample/data.md') }}
+```
+
+### Load Markdown Table of Contents as data
+
+Parse and handle Markdown table of contents data from files in the working directory like so;
+
+{% raw %}
+```
+{{ load_markdown_toc_tokens('sample/data.md') }}
+```
+{% endraw %}
+
+When evaluated becomes:
+
+```
+{{ load_markdown_toc_tokens('sample/data.md') }}
+```
+
 ## Development
 
 Try it locally with Python 3.x;
