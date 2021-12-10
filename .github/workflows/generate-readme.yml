@@ -16,16 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          repository: EffortGames/action-template
-          path: my-project
       - uses: EffortGames/action-template@v1
         with:
-          working_directory: './my-project'
           source: 'README.md.template'
           target: 'README.md'
       - run: |
-          cd my-project
           git config --global user.email "automation@effortgames.nl"
           git config --global user.name "EffortGames Automation"
           git add README.md
