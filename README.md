@@ -11,7 +11,7 @@
 Refer to the [generate-readme workflow](.github/workflows/generate-readme.yml) and [template](./README.md.template);
 
 ```yml
-name: Update README.md
+name: Generate README.md
 
 on:
   push:
