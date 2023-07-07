@@ -2,6 +2,8 @@
 
 # [{{ github.repository }}]({{ github.event.repository.owner.html_url }})
 
+[![Status: Production ready](https://img.shields.io/badge/status-production_ready-green)](https://release-engineers.com/open-source-badges/)
+
 `action-template` runs the Jinja2 templating engine against any given files during a GitHub workflow, and makes the GitHub context available to it.
 
 > ⚠️This action runs setup-python and runs pip install globally. If you care about this, make sure to run the action in a separate job.
