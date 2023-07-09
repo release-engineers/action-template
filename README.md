@@ -3,6 +3,7 @@
 # release-engineers/action-template
 
 [![Status: Production ready](https://img.shields.io/badge/status-production_ready-green)](https://release-engineers.com/open-source-badges/)
+[![PyPI version](https://badge.fury.io/py/re-y.svg)](https://badge.fury.io/py/re-action-template)
 
 `action-template` runs the Jinja2 templating engine against any given files during a GitHub workflow, and makes the GitHub context available to it.
 
@@ -92,7 +93,7 @@ Parse and handle JSON data from files in the working directory like so;
 When evaluated becomes:
 
 ```
-This text comes from a JSON file.
+This text is a JSON value in a file.
 ```
 
 ### Load YAML
@@ -108,7 +109,7 @@ Parse and handle YAML data from files in the working directory like so;
 When evaluated becomes:
 
 ```
-This text comes from a YAML file
+This text is a YAML value in a file
 ```
 
 ### Load Markdown Table of Contents as HTML
