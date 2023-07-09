@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "re-action-template"
-version = "2.0.2"
+version = "2.0.3"
 description = ""
 authors = ["Philipp Gayret <philipp@release-engineers.com>"]
 readme = "README.md"
