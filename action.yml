@@ -24,8 +24,9 @@ runs:
         WORKING_DIRECTORY: ${{ inputs.working_directory }}
         INPUT_SOURCE: ${{ inputs.source }}
         INPUT_TARGET: ${{ inputs.target }}
-        GITHUB_ACTION_PATH: ${{ github.action_path }}
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
-        pip install -r "$GITHUB_ACTION_PATH/requirements.txt"
-        (cd "$WORKING_DIRECTORY" && "$GITHUB_ACTION_PATH/main.py" "$INPUT_SOURCE" "$GITHUB_CONTEXT" > "$INPUT_TARGET")
+       docker run \
+        --workdir /work \
+        --volume "${WORKING_DIRECTORY}":/work \
+        ghcr.io/release-engineers/action-template:2.0.0 render "${INPUT_SOURCE}" "${GITHUB_CONTEXT}" > "${INPUT_TARGET}"

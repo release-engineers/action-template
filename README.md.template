@@ -1,24 +1,20 @@
 <!-- README.md is auto-generated from README.md.template -->
 
-# [{{ github.repository }}]({{ github.event.repository.owner.html_url }})
+# release-engineers/action-template
 
 [![Status: Production ready](https://img.shields.io/badge/status-production_ready-green)](https://release-engineers.com/open-source-badges/)
 
 `action-template` runs the Jinja2 templating engine against any given files during a GitHub workflow, and makes the GitHub context available to it.
 
-> ⚠️This action runs setup-python and runs pip install globally. If you care about this, make sure to run the action in a separate job.
-
 ## Usage
 
-Refer to the [generate-readme workflow](.github/workflows/generate-readme.yml) and [template](./README.md.template);
+action-template can be used as a GitHub Action;
 
 ```yml
 {{ load('.github/workflows/generate-readme.yml') }}
 ```
 
-## Templates
-
-This action runs Jinja2 with a few extra's;
+## Features
 
 ### GitHub Context
 
@@ -52,14 +48,14 @@ Parse and handle JSON data from files in the working directory like so;
 
 {% raw %}
 ```
-{{ load_json('sample/data.json').info.from_json }}
+{{ load_json('tests/data/data.json').info.from_json }}
 ```
 {% endraw %}
 
 When evaluated becomes:
 
 ```
-{{ load_json('sample/data.json').info.from_json }}
+{{ load_json('tests/data/data.json').info.from_json }}
 ```
 
 ### Load YAML
@@ -68,14 +64,14 @@ Parse and handle YAML data from files in the working directory like so;
 
 {% raw %}
 ```
-{{ load_yaml('sample/data.yml').info.from_yaml }}
+{{ load_yaml('tests/data/data.yml').info.from_yaml }}
 ```
 {% endraw %}
 
 When evaluated becomes:
 
 ```
-{{ load_yaml('sample/data.yml').info.from_yaml }}
+{{ load_yaml('tests/data/data.yml').info.from_yaml }}
 ```
 
 ### Load Markdown Table of Contents as HTML
@@ -84,14 +80,14 @@ Parse and obtain a Markdown table of contents from files in the working director
 
 {% raw %}
 ```
-{{ load_markdown_toc('sample/data.md') }}
+{{ load_markdown_toc('tests/data/data.md') }}
 ```
 {% endraw %}
 
 When evaluated becomes:
 
 ```
-{{ load_markdown_toc('sample/data.md') }}
+{{ load_markdown_toc('tests/data/data.md') }}
 ```
 
 ### Load Markdown Table of Contents as data
@@ -100,19 +96,30 @@ Parse and handle Markdown table of contents data from files in the working direc
 
 {% raw %}
 ```
-{{ load_markdown_toc_tokens('sample/data.md') }}
+{{ load_markdown_toc_tokens('tests/data/data.md') }}
 ```
 {% endraw %}
 
 When evaluated becomes:
 
 ```
-{{ load_markdown_toc_tokens('sample/data.md') }}
+{{ load_markdown_toc_tokens('tests/data/data.md') }}
 ```
 
-## Development
+## Contributing
 
-Try it locally with Python 3.x;
+This is a Python Poetry project using [Fire](https://github.com/google/python-fire).
+See [Poetry](https://python-poetry.org/) for more information.
 
-    pip install -r requirements.txt
-    ./main.py README.md.template "$(cat sample/github.json)"
+Development requires:
+
+- Bash
+- [Docker](https://www.docker.com/)
+- [Python](https://www.python.org/)
+- [Poetry](https://python-poetry.org/)
+
+See [`app.sh`](./app.sh) for building, running and releasing the application.
+
+## Links
+
+This project was created using [template-poetry](https://github.com/release-engineers/template-poetry).
