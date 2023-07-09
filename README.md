@@ -3,7 +3,7 @@
 # release-engineers/action-template
 
 [![Status: Production ready](https://img.shields.io/badge/status-production_ready-green)](https://release-engineers.com/open-source-badges/)
-[![PyPI version](https://badge.fury.io/py/re-y.svg)](https://badge.fury.io/py/re-action-template)
+[![PyPI version](https://badge.fury.io/py/re-action-template.svg)](https://badge.fury.io/py/re-action-template)
 
 `action-template` runs the Jinja2 templating engine against any given files during a GitHub workflow, and makes the GitHub context available to it.
 
