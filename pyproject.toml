@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "action-template"
+name = "re-action-template"
 version = "1.0.0"
 description = ""
 authors = ["Philipp Gayret <philipp@release-engineers.com>"]
