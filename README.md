@@ -12,44 +12,39 @@
 action-template can be used as a GitHub Action;
 
 ```yml
-name: Generate README.md
+name: Sample Workflow
 
 on:
   push:
     branches:
       - master
-    paths:
-      - 'README.md.template'
-  workflow_dispatch:
-
-defaults:
-  run:
-    shell: bash --login {0}
 
 permissions:
   contents: write
 
 jobs:
-  run-templating:
+  templating:
     runs-on: ubuntu-latest
     steps:
-      - uses: release-engineers/action-setup-bash@v1
       - uses: actions/checkout@v3
+        with:
+          ref: master
       - uses: release-engineers/action-template@v2
         with:
           source: 'README.md.template'
           target: 'README.md'
-      - run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - shell: bash
+        run: |
+          git config --global --add safe.directory '*'
+          git config --local user.name 'github-actions[bot]'
+          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
-          git commit --no-verify -m "docs: Regenerate README.md"
-          
-          # rebase and push in a retry loop
-          for i in {1..5}; do
-            git pull --rebase && git push && break || sleep 1
-          done
-
+          if git commit --no-verify -m "docs: Regenerate README.md"; then
+            # rebase and push in a retry loop
+            for i in {1..5}; do
+              git pull --rebase && git push && break || sleep 1
+            done
+          fi
 ```
 
 ## Features
